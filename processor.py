@@ -47,12 +47,3 @@ class Processor:
         self.channel.basic_publish(exchange='',
                                    routing_key=self._get_done_routing_key(),
                                    body=message)
-
-
-def callback(ch, method, properties, body):
-    print(" [x] Received %r" % body)
-    return body
-
-
-test = Processor("", "test", callback)
-test.run()
