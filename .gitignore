@@ -15,6 +15,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+<<<<<<< HEAD
 lib/
 lib64/
 parts/
@@ -107,3 +108,8 @@ venv.bak/
 .eggs/
 .vscode/
 >>>>>>> add Processor
+=======
+.vscode/
+build/
+.eggs/
+>>>>>>> add tests

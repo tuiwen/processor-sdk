@@ -31,7 +31,7 @@ def callback(ch, method, properties, body):
 
 
 test = Processor(
-    "amqp://guest:guest@127.0.0.1:5672/%2F?backpressure_detection=t", "test", callback)
+    "guest:guest@127.0.0.1:5672", "test", callback)
 test.run()
 
 

@@ -1,0 +1,6 @@
+.eggs/
+.vscode/
+processor.sdk.egg-info
+build/
+.eggs/
+__pycache__/
