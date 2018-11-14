@@ -31,18 +31,19 @@ class Processor:
 
     def run(self):
         self._channel.basic_consume(self.call_back_handler,
-                                    queue=self._get_queue(),
-                                    no_ack=True)
+                                    queue=self._get_queue())
         self._channel.start_consuming()
 
-    def call_back_handler(self, *args, **kwargs):
+    def call_back_handler(self, ch, method, properties, body):
         try:
             logger.info("%s callback start." % self._name)
-            message = self._callback(*args, **kwargs)
-            self.push_task_done(message)
+            message = self._callback(body)
+            if message is not None:
+                self.push_task_done(message)
+                ch.basic_ack(delivery_tag=method.delivery_tag)
             logger.info("%s callback end." % self._name)
         except Exception as err:
-            logger.info("%s callback error,err:" % (self._name, err))
+            logger.info("%s callback error,err:%s" % (self._name, err))
             traceback.print_exc()
 
     def push_task_done(self, message):
